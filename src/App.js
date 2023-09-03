@@ -1,38 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux'
-import { toggleTheme } from './stores/uiSlice';
+import { useSelector } from 'react-redux'
 import classNames from 'classnames';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/ui/Header';
+import Home from './pages/home';
+import About from './pages/about';
+import Projects from './pages/projects';
+import SingleProject from './pages/single-project';
 function App() {
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
 
-  const dispatch = useDispatch();
-
-  const onClickToggle = () => {
-    console.log('clicked');
-    dispatch(toggleTheme());
-  }
   const AppHeaderClasses = classNames({
-    'App-header': true,
+    'header fixed-top': true,
     'light': !isDarkMode,
     'dark': isDarkMode,
   })
+
+
   return (
-    <div className="App" >
-      <header className={AppHeaderClasses} >
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button
-          className="button"
-          onClick={onClickToggle}
-          style={{ padding: '8px' }}
-        >
-          Toggle Theme
-        </button>
-      </header>
-    </div >
+    <Router>
+      <div className="container " >
+        <header className={AppHeaderClasses} >
+          <Header />
+        </header>
+
+
+        <main className="main">
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/projects" element={<Projects />} />
+            <Route exact path="/projects/:id" element={<SingleProject />} />
+          </Routes>
+        </main>
+
+      </div >
+    </Router>
+
   );
 }
 
