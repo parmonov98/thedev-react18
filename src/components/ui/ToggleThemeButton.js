@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useDispatch } from 'react-redux'
-import { toggleTheme } from '../../redux/reducers/uiSlice';
+import { toggleTheme } from "../../redux/actions/ui";
 
 const ToggleThemeButton = () => {
 

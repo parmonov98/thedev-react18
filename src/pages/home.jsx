@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { useDispatch } from 'react-redux'
-import { toggleTheme } from '../redux/reducers/uiSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleTheme } from '../redux/actions/ui';
 const Home = () => {
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
 
   const dispatch = useDispatch();
   const onClickToggle = () => {
-    dispatch(toggleTheme());
+    dispatch(toggleTheme(isDarkMode));
   }
 
   return (
